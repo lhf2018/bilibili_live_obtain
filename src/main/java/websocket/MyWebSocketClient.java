@@ -89,6 +89,7 @@ public class MyWebSocketClient extends WebSocketClient {
         }
         System.out.println(result);
         //发送数据
+        //todo 数据包处理 https://blog.csdn.net/yyznm/article/details/116543107
         send(getCertification(json));
 
     }
