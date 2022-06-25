@@ -1,4 +1,4 @@
-package websocket;
+package lhf2018.websocket;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 @Component
-public class BiliBiliGet {
+public class BilibiliWebSocketConnection {
     @Autowired
     private MyWebSocketClient myWebSocketClient;
 
