@@ -1,11 +1,12 @@
 package lhf2018.websocket;
 
+import lhf2018.utils.ByteUtil;
+import lhf2018.utils.MessageHandler;
+import lhf2018.websocket.cons.WebSocketRequestCons;
 import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.springframework.stereotype.Component;
-import lhf2018.websocket.cons.WebSocketRequestCons;
-import lhf2018.utils.ByteUtil;
 
 import java.net.URI;
 import java.nio.ByteBuffer;
@@ -65,8 +66,14 @@ public class MyWebSocketClient extends WebSocketClient {
 
     @Override
     public void onMessage(ByteBuffer bytes) {
-        log.info("onMessage, bytes={}", bytes);
-        //todo 接收消息的处理
+        try {
+            //todo 接收消息的处理
+            new MessageHandler().messageHandle(bytes);
+//            new MessageHandler().getMessage(bytes);
+//            log.info("onMessage, content={}", result);
+        } catch (Exception ignored) {
+        }
+
     }
 
     @Override

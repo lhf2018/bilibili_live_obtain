@@ -7,7 +7,7 @@ public class WebSocketRequestCons {
     public static final String CERTIFICATION_REQUEST_JSON = """
             {
                 "uid": 0,
-                "roomid": 24889026,
+                "roomid": 21423462,
                 "protover": 1,
                 "platform": "web",
                 "clientver": "1.4.0"
