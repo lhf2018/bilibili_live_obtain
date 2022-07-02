@@ -1,8 +1,8 @@
 package lhf2018.message.receiver;
 
-import lhf2018.utils.ByteUtil;
+import lhf2018.cons.WebSocketRequestCons;
 import lhf2018.message.handler.MessageHandler;
-import lhf2018.message.cons.WebSocketRequestCons;
+import lhf2018.utils.ByteUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -69,10 +69,7 @@ public class MyWebSocketClient extends WebSocketClient {
         try {
             //todo 接收消息的处理
             new MessageHandler().messageHandle(bytes);
-//            new MessageHandler().getMessage(bytes);
-//            log.info("onMessage, content={}", result);
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
 
     }
 

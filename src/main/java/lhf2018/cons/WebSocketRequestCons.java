@@ -1,4 +1,4 @@
-package lhf2018.message.cons;
+package lhf2018.cons;
 
 public class WebSocketRequestCons {
     public static final String WEBSOCKET_REQUEST_URL = "ws://broadcastlv.chat.bilibili.com:2244/sub";
