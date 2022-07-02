@@ -1,4 +1,4 @@
-package lhf2018.websocket;
+package lhf2018.message.receiver;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

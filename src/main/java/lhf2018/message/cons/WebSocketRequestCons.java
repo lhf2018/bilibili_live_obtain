@@ -1,4 +1,4 @@
-package lhf2018.websocket.cons;
+package lhf2018.message.cons;
 
 public class WebSocketRequestCons {
     public static final String WEBSOCKET_REQUEST_URL = "ws://broadcastlv.chat.bilibili.com:2244/sub";
@@ -7,7 +7,7 @@ public class WebSocketRequestCons {
     public static final String CERTIFICATION_REQUEST_JSON = """
             {
                 "uid": 0,
-                "roomid": 21423462,
+                "roomid": 6136246,
                 "protover": 1,
                 "platform": "web",
                 "clientver": "1.4.0"

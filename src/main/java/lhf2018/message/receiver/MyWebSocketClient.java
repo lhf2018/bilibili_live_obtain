@@ -1,8 +1,8 @@
-package lhf2018.websocket;
+package lhf2018.message.receiver;
 
 import lhf2018.utils.ByteUtil;
-import lhf2018.utils.MessageHandler;
-import lhf2018.websocket.cons.WebSocketRequestCons;
+import lhf2018.message.handler.MessageHandler;
+import lhf2018.message.cons.WebSocketRequestCons;
 import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;

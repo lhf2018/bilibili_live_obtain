@@ -1,5 +1,6 @@
-package lhf2018.utils;
+package lhf2018.message.handler;
 
+import com.google.common.collect.ImmutableList;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
@@ -8,22 +9,31 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 
 @Slf4j
 public class MessageHandler {
-    private static final String DANMU = "DANMU_MSG";
-    private static final String GIFT = "SEND_GIFT";
+
+    private static final List<String> MSG_TYPE_LIST = new ImmutableList.Builder<String>().addAll(
+            Arrays.stream(HandlerType.values()).map(Enum::name).collect(Collectors.toList())
+    ).build();
 
 
     public void messageHandle(ByteBuffer byteBuffer) throws DataFormatException, UnsupportedEncodingException {
         List<String> s = messageToJson(byteBuffer);
         for (String message : s) {
-            if (message.contains(DANMU)) {
-                log.info("danmu_message={}", message);
-            } else if (message.contains(GIFT)) {
-                log.info("send_gift_message={}", message);
+            int index = message.indexOf(",");
+            String cmd = message.substring(8, index - 1);
+            if (MSG_TYPE_LIST.contains(cmd)) {
+                Class handlerClass = HandlerType.valueOf(cmd).getHandler();
+                try {
+                    Handler handler = (Handler) handlerClass.newInstance();
+                    handler.handler(message);
+                } catch (InstantiationException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
