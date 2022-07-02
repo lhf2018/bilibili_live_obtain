@@ -7,6 +7,6 @@
 * 想要监听的直播间id，在直播间url上，需要配置在WebSocketRequestCons中CERTIFICATION_REQUEST_JSON字段的roomid参数后再启动
 
 ## 待办
-* 目前只有windows系统声音，未来考虑接入ai语音
+* 目前只有windows系统声音，未来考虑接入第三方语音
 * 语音播报使用线程池处理
 * 为了增加更多bilibili直播间交互的处理，比如送礼物等
