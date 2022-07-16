@@ -3,6 +3,7 @@ package lhf2018.message.receiver;
 import lhf2018.cons.WebSocketRequestCons;
 import lhf2018.message.handler.MessageHandler;
 import lhf2018.utils.ByteUtil;
+import lhf2018.utils.HttpUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -14,12 +15,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * 接受websocket消息
+ */
 @Component
 @Slf4j
-public class MyWebSocketClient extends WebSocketClient {
+public class ReceiverClient extends WebSocketClient {
 
 
-    public MyWebSocketClient() {
+    public ReceiverClient() {
         super(URI.create(WebSocketRequestCons.WEBSOCKET_REQUEST_URL));
     }
 
@@ -42,7 +46,7 @@ public class MyWebSocketClient extends WebSocketClient {
     }
 
     private byte[] getCertification() {
-        byte[] body = WebSocketRequestCons.CERTIFICATION_REQUEST_JSON.getBytes(StandardCharsets.UTF_8);
+        byte[] body = getCertificationRequestJson().getBytes(StandardCharsets.UTF_8);
         String headStr = WebSocketRequestCons.CERTIFICATION_REQUEST_HEAD_HEX.replace("{replce}", Integer.toHexString(body.length + 16));
         byte[] headBytes = ByteUtil.hexToBytes(headStr);
 
@@ -50,6 +54,15 @@ public class MyWebSocketClient extends WebSocketClient {
         System.arraycopy(headBytes, 0, result, 0, headBytes.length);
         System.arraycopy(body, 0, result, headBytes.length, body.length);
         return result;
+    }
+
+    /**
+     * 向api请求实际的roomid，有些直播间的url是shortid
+     */
+    private String getCertificationRequestJson() {
+        String resp = HttpUtils.sendRequest(WebSocketRequestCons.ROOM_API_URL);
+        String roomId = resp.substring(resp.indexOf("room_id\":") + 9, resp.indexOf(",", resp.indexOf("room_id\":")));
+        return String.format(WebSocketRequestCons.CERTIFICATION_REQUEST_JSON, roomId);
     }
 
 
@@ -69,7 +82,8 @@ public class MyWebSocketClient extends WebSocketClient {
         try {
             //todo 接收消息的处理
             new MessageHandler().messageHandle(bytes);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
     }
 

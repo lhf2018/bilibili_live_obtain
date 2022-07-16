@@ -8,10 +8,10 @@ import javax.annotation.PostConstruct;
 @Component
 public class BilibiliWebSocketConnection {
     @Autowired
-    private MyWebSocketClient myWebSocketClient;
+    private ReceiverClient receiverClient;
 
     @PostConstruct
     private void connect() throws InterruptedException {
-        myWebSocketClient.connectBlocking();
+        receiverClient.connectBlocking();
     }
 }

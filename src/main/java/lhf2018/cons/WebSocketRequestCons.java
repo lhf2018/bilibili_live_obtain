@@ -3,11 +3,12 @@ package lhf2018.cons;
 public class WebSocketRequestCons {
     public static final String WEBSOCKET_REQUEST_URL = "ws://broadcastlv.chat.bilibili.com:2244/sub";
     //需要向该api请求来获取
-    public static final String ROOM_API_URL = "https://api.live.bilibili.com/room/v1/Room/room_init?id=22834435";
+    private static final String ROOM_ID = "271744";
+    public static final String ROOM_API_URL = "https://api.live.bilibili.com/room/v1/Room/room_init?id=" + ROOM_ID;
     public static final String CERTIFICATION_REQUEST_JSON = """
             {
                 "uid": 0,
-                "roomid": 21721813,
+                "roomid": %s,
                 "protover": 1,
                 "platform": "web",
                 "clientver": "1.4.0"
